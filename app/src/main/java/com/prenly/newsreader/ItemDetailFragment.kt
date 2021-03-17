@@ -1,4 +1,4 @@
-package com.prenly.newsReader
+package com.prenly.newsreader
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.prenly.newsReader.dummy.DummyContent
+import com.prenly.newsreader.dummy.DummyContent
 
 /**
  * A fragment representing a single Item detail screen.

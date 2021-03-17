@@ -1,4 +1,4 @@
-package com.prenly.newsReader
+package com.prenly.newsreader
 
 import android.content.Intent
 import android.os.Bundle
@@ -13,7 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 
-import com.prenly.newsReader.dummy.DummyContent
+import com.prenly.newsreader.dummy.DummyContent
 
 /**
  * An activity representing a list of Pings. This activity

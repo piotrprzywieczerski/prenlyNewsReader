@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.prenly.newsReader">
+    package="com.prenly.newsreader">
 
     <application
         android:allowBackup="true"
@@ -26,7 +26,7 @@
             android:theme="@style/Theme.NewsReader.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.prenly.newsReader.ItemListActivity" />
+                android:value="com.prenly.newsreader.ItemListActivity" />
         </activity>
     </application>
 

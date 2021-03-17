@@ -1,4 +1,4 @@
-package com.prenly.newsReader.dummy
+package com.prenly.newsreader.dummy
 
 import java.util.ArrayList
 import java.util.HashMap

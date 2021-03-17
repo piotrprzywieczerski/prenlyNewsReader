@@ -1,4 +1,4 @@
-package com.prenly.newsReader
+package com.prenly.newsreader
 
 import android.content.Intent
 import android.os.Bundle
