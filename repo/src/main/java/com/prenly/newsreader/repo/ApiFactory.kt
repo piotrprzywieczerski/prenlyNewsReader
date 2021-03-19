@@ -24,6 +24,7 @@ class ApiFactory {
         var okClientBuilder = OkHttpClient.Builder()
         okClientBuilder.attachProxy(BuildConfig.HTTP_PROXY_INET, BuildConfig.HTTP_PROXY_PORT)
         okClientBuilder.ignoreHttpsSecurity()
+        okClientBuilder.addInterceptor(ApiKeyInterceptor())
 
         val moshi = Moshi.Builder()
             .add(KotlinJsonAdapterFactory())

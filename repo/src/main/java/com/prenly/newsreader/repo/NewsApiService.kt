@@ -8,6 +8,6 @@ import retrofit2.http.Query
 interface NewsApiService {
 
     @GET("everything")
-    fun getArticles(@Query("q") query: String, @Query("apiKey") key: String): Single<ArticleSearchResult>
+    fun getArticles(@Query("q") query: String): Single<ArticleSearchResult>
 
 }

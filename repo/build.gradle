@@ -25,6 +25,15 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        debug {
+            Properties properties = new Properties()
+            try {
+                properties.load(project.rootProject.file('local.properties').newDataInputStream())
+                buildConfigField "String", "HTTP_PROXY_INET", properties.getProperty('proxy.inet', 'null')
+                buildConfigField "int", "HTTP_PROXY_PORT", properties.getProperty('proxy.port', '0')
+            } catch (Exception ignore) {
+            }
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8

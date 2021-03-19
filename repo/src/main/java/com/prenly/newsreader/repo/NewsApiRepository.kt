@@ -11,8 +11,7 @@ class NewsApiRepository : NewsRepository {
 
     override fun articles(): Single<List<Article>> {
         return service.getArticles(
-            query = "apple",
-            key = "fbf4b25ae3f54703a21cc6da7b618d96"
+            query = "apple"
         )
             .doOnSuccess { println("articles: $it") }
             .map { emptyList<Article>() }
