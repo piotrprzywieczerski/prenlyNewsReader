@@ -1,6 +1,5 @@
 package com.prenly.newsreader.repo
 
-import android.util.Log
 import org.junit.Assert
 import org.junit.Test
 import com.prenly.newsreader.repo.NewsApiRepository as Repository
@@ -14,7 +13,7 @@ class NewsApiRepositoryTest {
         val response = newsApiRepository.articles()
             .blockingGet()
 
-        Log.d("Piotr", "Piotr response: $response")
+        println("Piotr response: $response")
         Assert.assertNotNull(response)
     }
 
