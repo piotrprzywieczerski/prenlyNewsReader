@@ -5,21 +5,23 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.prenly.newsreader.ArticleListActivity
 import com.prenly.newsreader.ItemDetailActivity
 import com.prenly.newsreader.ItemDetailFragment
 import com.prenly.newsreader.R
+import com.prenly.newsreader.databinding.ItemListContentBinding
+import com.prenly.newsreader.domain.model.Article
 import com.prenly.newsreader.dummy.DummyContent
 
 class ArticleListAdapter(
     private val parentActivity: ArticleListActivity,
-    private val twoPane: Boolean
-) :
-    RecyclerView.Adapter<ArticleListAdapter.ViewHolder>() {
+    private val twoPane: Boolean,
+    private val articleListViewModel: ArticleListViewModel
+) : ListAdapter<Article, ArticleListAdapter.ViewHolder>(ArticleDiffCallback()) {
 
-    private var items: List<DummyContent.DummyItem> = emptyList()
     private val onClickListener: View.OnClickListener
 
     init {
@@ -47,32 +49,41 @@ class ArticleListAdapter(
         }
     }
 
-    fun setItems(values: List<DummyContent.DummyItem>) {
-        this.items = values
-
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_list_content, parent, false)
-        return ViewHolder(view)
+        return ViewHolder.from(parent)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = items[position]
-        holder.idView.text = item.id
-        holder.contentView.text = item.content
-
-        with(holder.itemView) {
-            tag = item
-            setOnClickListener(onClickListener)
-        }
+        holder.bind(articleListViewModel, getItem(position))
     }
 
-    override fun getItemCount() = items.size
+    class ViewHolder private constructor(private val binding: ItemListContentBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val idView: TextView = view.findViewById(R.id.id_text)
-        val contentView: TextView = view.findViewById(R.id.content)
+        fun bind(viewModel: ArticleListViewModel, item: Article) {
+
+            binding.articleListVM = viewModel
+            binding.article = item
+            binding.executePendingBindings()
+        }
+
+        companion object {
+            fun from(parent: ViewGroup): ViewHolder {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding = ItemListContentBinding.inflate(layoutInflater, parent, false)
+
+                return ViewHolder(binding)
+            }
+        }
+    }
+}
+
+class ArticleDiffCallback : DiffUtil.ItemCallback<Article>() {
+    override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
+        return oldItem.id == newItem.id
+    }
+
+    override fun areContentsTheSame(oldItem: Article, newItem: Article): Boolean {
+        return oldItem == newItem
     }
 }

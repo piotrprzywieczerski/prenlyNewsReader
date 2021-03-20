@@ -55,17 +55,21 @@ class ArticleListActivity : AppCompatActivity() {
             twoPane = true
         }
 
-        setupRecyclerView(findViewById(R.id.item_list))
+        setupRecyclerView(findViewById(R.id.item_list), articleListViewModel)
 
         articleListViewModel.start()
         binding.viewmodel = articleListViewModel
     }
 
-    private fun setupRecyclerView(recyclerView: RecyclerView) {
+    private fun setupRecyclerView(
+        recyclerView: RecyclerView,
+        articleListViewModel: ArticleListViewModel
+    ) {
         recyclerView.adapter =
             ArticleListAdapter(
                 this,
-                twoPane
+                twoPane,
+                articleListViewModel
             )
     }
 
