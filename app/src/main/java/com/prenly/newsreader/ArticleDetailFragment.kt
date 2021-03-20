@@ -12,10 +12,10 @@ import com.prenly.newsreader.dummy.DummyContent
 /**
  * A fragment representing a single Item detail screen.
  * This fragment is either contained in a [ArticleListActivity]
- * in two-pane mode (on tablets) or a [ItemDetailActivity]
+ * in two-pane mode (on tablets) or a [ArticleDetailActivity]
  * on handsets.
  */
-class ItemDetailFragment : Fragment() {
+class ArticleDetailFragment : Fragment() {
 
     /**
      * The dummy content this fragment is presenting.
@@ -38,7 +38,7 @@ class ItemDetailFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val rootView = inflater.inflate(R.layout.item_detail, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_article_detail, container, false)
 
         // Show the dummy content as text in a TextView.
         item?.let {

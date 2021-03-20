@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.prenly.newsreader.ItemDetailActivity
-import com.prenly.newsreader.ItemDetailFragment
+import com.prenly.newsreader.ArticleDetailActivity
+import com.prenly.newsreader.ArticleDetailFragment
 import com.prenly.newsreader.databinding.ItemArticleListImageOnTheSideBinding
 import com.prenly.newsreader.domain.model.Article
 import com.prenly.newsreader.dummy.DummyContent
@@ -24,9 +24,9 @@ class ArticleListAdapter(
             val item = v.tag as DummyContent.DummyItem
             val intent = Intent(
                 v.context,
-                ItemDetailActivity::class.java
+                ArticleDetailActivity::class.java
             ).apply {
-                putExtra(ItemDetailFragment.ARG_ITEM_ID, item.id)
+                putExtra(ArticleDetailFragment.ARG_ITEM_ID, item.id)
             }
             v.context.startActivity(intent)
         }
