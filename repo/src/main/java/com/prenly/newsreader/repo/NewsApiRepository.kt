@@ -19,7 +19,9 @@ class NewsApiRepository : NewsRepository {
                         id = it.url ?: "1",
                         title = it.title ?: "title",
                         imageUrl = it.urlToImage ?: "",
-                        url = it.url
+                        url = it.url,
+                        description = it.description,
+                        content = it.content
                     )
                 }
                 Single.just(articles)

@@ -1,10 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/item_detail"
-    style="?android:attr/textAppearanceLarge"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp"
-    android:textIsSelectable="true"
-    tools:context=".ArticleDetailFragment" />
+
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="article"
+            type="com.prenly.newsreader.domain.model.Article" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/article_title"
+            style="?android:attr/textAppearanceLarge"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="@{article.title}"
+            android:textIsSelectable="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:context=".ArticleDetailFragment" />
+
+        <TextView xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/article_description"
+            style="?android:attr/textAppearanceLarge"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="@{article.description}"
+            android:textIsSelectable="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/article_title"
+            tools:context=".ArticleDetailFragment" />
+
+        <TextView xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/article_content"
+            style="?android:attr/textAppearanceLarge"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:textIsSelectable="true"
+            android:text="@{article.content}"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/article_description"
+            tools:context=".ArticleDetailFragment" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -1,13 +1,16 @@
 package com.prenly.newsreader
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import com.google.android.material.appbar.CollapsingToolbarLayout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import com.prenly.newsreader.dummy.DummyContent
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
+import com.prenly.newsreader.articlelist.ArticleListViewModel
+import com.prenly.newsreader.databinding.FragmentArticleDetailBinding
+import com.prenly.newsreader.domain.model.Article
 
 /**
  * A fragment representing a single Item detail screen.
@@ -17,35 +20,39 @@ import com.prenly.newsreader.dummy.DummyContent
  */
 class ArticleDetailFragment : Fragment() {
 
-    /**
-     * The dummy content this fragment is presenting.
-     */
-    private var item: DummyContent.DummyItem? = null
+    private var articleId: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         arguments?.let {
             if (it.containsKey(ARG_ITEM_ID)) {
-                // Load the dummy content specified by the fragment
-                // arguments. In a real-world scenario, use a Loader
-                // to load content from a content provider.
-                item = DummyContent.ITEM_MAP[it.getString(ARG_ITEM_ID)]
-                activity?.findViewById<CollapsingToolbarLayout>(R.id.toolbar_layout)?.title = item?.content
+                articleId = it.getString(ARG_ITEM_ID)
             }
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        val rootView = inflater.inflate(R.layout.fragment_article_detail, container, false)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val binding =
+            FragmentArticleDetailBinding.inflate(LayoutInflater.from(context), container, false)
 
-        // Show the dummy content as text in a TextView.
-        item?.let {
-            rootView.findViewById<TextView>(R.id.item_detail).text = it.details
+        articleId?.let {
+            val articleListViewModel: ArticleListViewModel by viewModels {
+                ViewModelFactory(
+                    activity?.application as NewsReaderApp
+                )
+            }
+            articleListViewModel.article(it).observe(this as LifecycleOwner,
+                Observer<Article> { article ->
+                    binding.article = article
+                }
+            )
         }
 
-        return rootView
+        return binding.root
     }
 
     companion object {

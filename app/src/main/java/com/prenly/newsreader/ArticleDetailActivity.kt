@@ -53,6 +53,7 @@ class ArticleDetailActivity : AppCompatActivity() {
             // using a fragment transaction.
             val fragment = ArticleDetailFragment().apply {
                 arguments = Bundle().apply {
+                    Timber.d("Piotr putting id: $articleId in the bundle")
                     putString(
                         ArticleDetailFragment.ARG_ITEM_ID,
                         articleId
