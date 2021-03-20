@@ -23,7 +23,7 @@ import com.prenly.newsreader.dummy.DummyContent
  * item details. On tablets, the activity presents the list of items and
  * item details side-by-side using two vertical panes.
  */
-class ItemListActivity : AppCompatActivity() {
+class ArticleListActivity : AppCompatActivity() {
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -33,7 +33,7 @@ class ItemListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_item_list)
+        setContentView(R.layout.activity_article_list)
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -59,7 +59,7 @@ class ItemListActivity : AppCompatActivity() {
         recyclerView.adapter = SimpleItemRecyclerViewAdapter(this, DummyContent.ITEMS, twoPane)
     }
 
-    class SimpleItemRecyclerViewAdapter(private val parentActivity: ItemListActivity,
+    class SimpleItemRecyclerViewAdapter(private val parentActivity: ArticleListActivity,
                                         private val values: List<DummyContent.DummyItem>,
                                         private val twoPane: Boolean) :
       RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>() {

@@ -11,7 +11,7 @@ import android.view.MenuItem
  * An activity representing a single Item detail screen. This
  * activity is only used on narrow width devices. On tablet-size devices,
  * item details are presented side-by-side with a list of items
- * in a [ItemListActivity].
+ * in a [ArticleListActivity].
  */
 class ItemDetailActivity : AppCompatActivity() {
 
@@ -62,7 +62,7 @@ class ItemDetailActivity : AppCompatActivity() {
               //
               // http://developer.android.com/design/patterns/navigation.html#up-vs-back
 
-              navigateUpTo(Intent(this, ItemListActivity::class.java))
+              navigateUpTo(Intent(this, ArticleListActivity::class.java))
               true
           }
           else -> super.onOptionsItemSelected(item)
