@@ -37,7 +37,7 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <include
-                layout="@layout/item_article_list"
+                layout="@layout/view_article_list"
                 app:model="@{viewmodel}" />
         </FrameLayout>
 

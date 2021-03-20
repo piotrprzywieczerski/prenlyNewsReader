@@ -12,7 +12,7 @@ import com.prenly.newsreader.ArticleListActivity
 import com.prenly.newsreader.ItemDetailActivity
 import com.prenly.newsreader.ItemDetailFragment
 import com.prenly.newsreader.R
-import com.prenly.newsreader.databinding.ItemListContentBinding
+import com.prenly.newsreader.databinding.ItemArticleListImageOnTheSideBinding
 import com.prenly.newsreader.domain.model.Article
 import com.prenly.newsreader.dummy.DummyContent
 
@@ -57,7 +57,7 @@ class ArticleListAdapter(
         holder.bind(articleListViewModel, getItem(position))
     }
 
-    class ViewHolder private constructor(private val binding: ItemListContentBinding) :
+    class ViewHolder private constructor(private val binding: ItemArticleListImageOnTheSideBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(viewModel: ArticleListViewModel, item: Article) {
@@ -70,7 +70,8 @@ class ArticleListAdapter(
         companion object {
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = ItemListContentBinding.inflate(layoutInflater, parent, false)
+                val binding =
+                    ItemArticleListImageOnTheSideBinding.inflate(layoutInflater, parent, false)
 
                 return ViewHolder(binding)
             }

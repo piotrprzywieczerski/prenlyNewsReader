@@ -20,5 +20,5 @@
         app:articles="@{model.articles}"
         app:layoutManager="LinearLayoutManager"
         tools:context=".ArticleListActivity"
-        tools:listitem="@layout/item_list_content" />
+        tools:listitem="@layout/item_article_list_image_on_the_side" />
 </layout>
