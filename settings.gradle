@@ -1,2 +1,4 @@
+include ':repo'
+include ':domain'
 include ':app'
 rootProject.name = "News Reader"
