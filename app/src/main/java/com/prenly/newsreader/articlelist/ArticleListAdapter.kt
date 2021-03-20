@@ -1,24 +1,19 @@
 package com.prenly.newsreader.articlelist
 
 import android.content.Intent
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.prenly.newsreader.ArticleListActivity
 import com.prenly.newsreader.ItemDetailActivity
 import com.prenly.newsreader.ItemDetailFragment
-import com.prenly.newsreader.R
 import com.prenly.newsreader.databinding.ItemArticleListImageOnTheSideBinding
 import com.prenly.newsreader.domain.model.Article
 import com.prenly.newsreader.dummy.DummyContent
 
 class ArticleListAdapter(
-    private val parentActivity: ArticleListActivity,
-    private val twoPane: Boolean,
     private val articleListViewModel: ArticleListViewModel
 ) : ListAdapter<Article, ArticleListAdapter.ViewHolder>(ArticleDiffCallback()) {
 
@@ -27,25 +22,13 @@ class ArticleListAdapter(
     init {
         onClickListener = View.OnClickListener { v ->
             val item = v.tag as DummyContent.DummyItem
-            if (twoPane) {
-                val fragment = ItemDetailFragment().apply {
-                    arguments = Bundle().apply {
-                        putString(ItemDetailFragment.ARG_ITEM_ID, item.id)
-                    }
-                }
-                parentActivity.supportFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.item_detail_container, fragment)
-                    .commit()
-            } else {
-                val intent = Intent(
-                    v.context,
-                    ItemDetailActivity::class.java
-                ).apply {
-                    putExtra(ItemDetailFragment.ARG_ITEM_ID, item.id)
-                }
-                v.context.startActivity(intent)
+            val intent = Intent(
+                v.context,
+                ItemDetailActivity::class.java
+            ).apply {
+                putExtra(ItemDetailFragment.ARG_ITEM_ID, item.id)
             }
+            v.context.startActivity(intent)
         }
     }
 
