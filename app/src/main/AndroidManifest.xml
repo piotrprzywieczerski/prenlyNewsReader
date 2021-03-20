@@ -2,9 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.prenly.newsreader">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
+        android:name=".NewsReaderApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -12,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NewsReader">
         <activity
-            android:name=".ItemListActivity"
+            android:name=".ArticleListActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.NewsReader.NoActionBar">
             <intent-filter>
@@ -24,11 +26,11 @@
         <activity
             android:name=".ItemDetailActivity"
             android:label="@string/title_item_detail"
-            android:parentActivityName=".ItemListActivity"
+            android:parentActivityName=".ArticleListActivity"
             android:theme="@style/Theme.NewsReader.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.prenly.newsreader.ItemListActivity" />
+                android:value="com.prenly.newsreader.ArticleListActivity" />
         </activity>
     </application>
 

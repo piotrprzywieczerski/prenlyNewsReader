@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.prenly.newsreader.articlelist.ArticleListViewModel" />
+    </data>
+
+    <androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/item_list"
+        android:name="com.prenly.newsReader.ItemListFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:articles="@{model.articles}"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="@integer/grid_columns"
+        tools:context=".ArticleListActivity"
+        tools:listitem="@layout/item_article_list_image_on_the_side" />
+</layout>

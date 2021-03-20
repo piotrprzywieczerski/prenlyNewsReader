@@ -5,6 +5,8 @@ import io.reactivex.Single
 
 interface NewsRepository {
 
+    fun topHeadlines(): Single<List<Article>>
+
     fun articles(): Single<List<Article>>
 
     fun articleDetails()
