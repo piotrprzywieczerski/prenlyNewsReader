@@ -29,7 +29,7 @@ class ArticleListActivity : AppCompatActivity() {
      */
     private var twoPane: Boolean = false
 
-    private val articleListViewModel: ArticleListViewModel by viewModels()
+    private val articleListViewModel: ArticleListViewModel by viewModels { ViewModelFactory(application as NewsReaderApp) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
