@@ -10,4 +10,10 @@ interface NewsApiService {
     @GET("everything")
     fun getArticles(@Query("q") query: String): Single<ArticleSearchResult>
 
+    @GET("top-headlines")
+    fun getHeadlines(
+        @Query("q") query: String?,
+        @Query("country") country: String?
+    ): Single<ArticleSearchResult>
+
 }

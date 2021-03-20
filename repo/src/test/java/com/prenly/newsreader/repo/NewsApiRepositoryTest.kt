@@ -18,6 +18,15 @@ class NewsApiRepositoryTest {
     }
 
     @Test
+    fun headlines() {
+        val response = newsApiRepository.topHeadlines()
+            .blockingGet()
+
+        println("Piotr response: $response")
+        Assert.assertNotNull(response)
+    }
+
+    @Test
     fun articleDetails() {
     }
 }

@@ -9,6 +9,13 @@ class NewsApiRepository : NewsRepository {
 
     private var service: NewsApiService = ApiFactory().createNewsApiService()
 
+    override fun topHeadlines(): Single<List<Article>> {
+        return service.getHeadlines(country = "US", query = null)
+            .doOnSuccess { println("headlines: $it") }
+            .map { emptyList<Article>() }
+
+    }
+
     override fun articles(): Single<List<Article>> {
         return service.getArticles(
             query = "apple"
