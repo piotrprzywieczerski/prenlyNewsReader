@@ -29,7 +29,11 @@ class ArticleListActivity : AppCompatActivity() {
      */
     private var twoPane: Boolean = false
 
-    private val articleListViewModel: ArticleListViewModel by viewModels { ViewModelFactory(application as NewsReaderApp) }
+    private val articleListViewModel: ArticleListViewModel by viewModels {
+        ViewModelFactory(
+            application as NewsReaderApp
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +41,8 @@ class ArticleListActivity : AppCompatActivity() {
             this,
             R.layout.activity_article_list
         )
+
+        binding.lifecycleOwner = this
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -57,7 +63,7 @@ class ArticleListActivity : AppCompatActivity() {
 
         setupRecyclerView(findViewById(R.id.item_list), articleListViewModel)
 
-        articleListViewModel.start()
+        articleListViewModel.fetchData()
         binding.viewmodel = articleListViewModel
     }
 
