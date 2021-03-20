@@ -15,7 +15,12 @@ class NewsApiRepository : NewsRepository {
         return service.getHeadlines(country = "US", query = null)
             .flatMap { searchResult ->
                 val articles = searchResult.articles.map {
-                    Article(it.url ?: "1", it.title ?: "title", it.urlToImage ?: "")
+                    Article(
+                        id = it.url ?: "1",
+                        title = it.title ?: "title",
+                        imageUrl = it.urlToImage ?: "",
+                        url = it.url
+                    )
                 }
                 Single.just(articles)
             }

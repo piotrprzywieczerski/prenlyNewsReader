@@ -11,7 +11,7 @@ import com.prenly.newsreader.ArticleDetailActivity
 import com.prenly.newsreader.ArticleDetailFragment
 import com.prenly.newsreader.databinding.ItemArticleListImageOnTheSideBinding
 import com.prenly.newsreader.domain.model.Article
-import com.prenly.newsreader.dummy.DummyContent
+import timber.log.Timber
 
 class ArticleListAdapter(
     private val articleListViewModel: ArticleListViewModel
@@ -21,7 +21,8 @@ class ArticleListAdapter(
 
     init {
         onClickListener = View.OnClickListener { v ->
-            val item = v.tag as DummyContent.DummyItem
+            val item = v.tag as Article
+            Timber.d("Piotr clicked on item: ${item.title}")
             val intent = Intent(
                 v.context,
                 ArticleDetailActivity::class.java
@@ -37,17 +38,26 @@ class ArticleListAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(articleListViewModel, getItem(position))
+        holder.bind(articleListViewModel, getItem(position), onClickListener)
     }
 
     class ViewHolder private constructor(private val binding: ItemArticleListImageOnTheSideBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(viewModel: ArticleListViewModel, item: Article) {
+        fun bind(
+            viewModel: ArticleListViewModel,
+            item: Article,
+            onClickListener: View.OnClickListener
+        ) {
 
             binding.articleListVM = viewModel
             binding.article = item
             binding.executePendingBindings()
+
+            with(binding.root) {
+                tag = item
+                setOnClickListener(onClickListener)
+            }
         }
 
         companion object {

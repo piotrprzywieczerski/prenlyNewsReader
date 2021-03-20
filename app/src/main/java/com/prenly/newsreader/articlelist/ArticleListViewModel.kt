@@ -17,6 +17,12 @@ class ArticleListViewModel constructor(private val repository: NewsRepository) :
             .toLiveData()
     }
 
+    fun article(id: String): LiveData<Article> {
+        return articles.map { articles ->
+            articles.first { it.url == id }
+        }
+    }
+
     fun fetchData() {
         _fetchData.value = true
     }
