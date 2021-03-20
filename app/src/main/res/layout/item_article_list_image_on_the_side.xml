@@ -16,7 +16,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="100dp">
+        android:background="@color/article_list_item_background"
+        android:elevation="@dimen/article_list_item_elevation">
 
         <ImageView
             android:id="@+id/image"
