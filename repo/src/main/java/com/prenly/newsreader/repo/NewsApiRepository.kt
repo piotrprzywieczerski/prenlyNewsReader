@@ -2,16 +2,18 @@ package com.prenly.newsreader.repo
 
 import com.prenly.newsreader.domain.NewsRepository
 import com.prenly.newsreader.domain.model.Article
+import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import com.prenly.newsreader.domain.RemoteResource
 
 
 class NewsApiRepository : NewsRepository {
 
     private var service: NewsApiService = ApiFactory().createNewsApiService()
 
-    override fun topHeadlines(): Single<List<Article>> {
+    override fun topHeadlines(): Observable<RemoteResource<List<Article>>> {
         return service.getHeadlines(country = "US", query = null)
             .flatMap { searchResult ->
                 val articles = searchResult.articles.map {
@@ -24,8 +26,10 @@ class NewsApiRepository : NewsRepository {
                         content = it.content
                     )
                 }
-                Single.just(articles)
+                Single.just(RemoteResource.Success(articles) as RemoteResource<List<Article>>)
             }
+            .toObservable()
+            .startWith(RemoteResource.Loading)
             .subscribeOn(Schedulers.computation())
             .observeOn(AndroidSchedulers.mainThread())
     }

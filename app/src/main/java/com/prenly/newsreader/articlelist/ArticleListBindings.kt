@@ -1,10 +1,12 @@
 package com.prenly.newsreader.articlelist
 
+import android.view.View
 import android.widget.ImageView
+import android.widget.ProgressBar
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.prenly.newsreader.ArticleListViewModelEvent
 import com.prenly.newsreader.GlideApp
-import com.prenly.newsreader.domain.model.Article
 
 /**
  * Created by Piotr Przywieczerski on 20.03.2021.
@@ -14,12 +16,25 @@ object ArticleListBindings {
 
     @JvmStatic
     @BindingAdapter("articles")
-    fun bindArticles(recyclerView: RecyclerView, articles: List<Article>?) {
-        articles?.let {
+    fun bindArticles(recyclerView: RecyclerView, articles: ArticleListViewModelEvent?) {
+        articles?.articles?.let { articleList ->
+            recyclerView.visibility = View.VISIBLE
             val adapter = recyclerView.adapter as? ArticleListAdapter
             adapter?.let {
-                adapter.submitList(articles)
+                adapter.submitList(articleList)
             }
+        } ?: run {
+            recyclerView.visibility = View.GONE
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("loading")
+    fun loading(progressBar: ProgressBar, articles: ArticleListViewModelEvent?) {
+        if (articles?.loading == true) {
+            progressBar.visibility = View.VISIBLE
+        } else {
+            progressBar.visibility = View.GONE
         }
     }
 

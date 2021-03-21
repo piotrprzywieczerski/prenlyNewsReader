@@ -13,8 +13,8 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
         android:background="@color/article_list_background"
+        android:fitsSystemWindows="true"
         tools:context=".ArticleListActivity">
 
         <com.google.android.material.appbar.AppBarLayout
@@ -39,7 +39,16 @@
 
             <include
                 layout="@layout/view_article_list"
+                android:visibility="gone"
                 app:model="@{viewmodel}" />
+
+            <ProgressBar
+                android:id="@+id/progressBar1"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:loading="@{viewmodel.articles}" />
         </FrameLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
