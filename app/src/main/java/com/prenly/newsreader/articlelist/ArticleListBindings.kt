@@ -5,6 +5,8 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.prenly.newsreader.ArticleListViewModelEvent
 import com.prenly.newsreader.ArticleViewModelEvent
 import com.prenly.newsreader.GlideApp
@@ -80,6 +82,21 @@ object ArticleListBindings {
             view.visibility = View.GONE
         } else {
             view.visibility = View.VISIBLE
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("title")
+    fun goneWhenTrue(appBarLayout: AppBarLayout, articleEvent: ArticleViewModelEvent?) {
+        articleEvent?.article?.let { article ->
+            appBarLayout.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { barLayout, verticalOffset ->
+                val scrollRange = barLayout?.totalScrollRange!!
+                if (scrollRange + verticalOffset == 0) {
+                    (appBarLayout.getChildAt(0) as? CollapsingToolbarLayout)?.title = article.title
+                } else {
+                    (appBarLayout.getChildAt(0) as? CollapsingToolbarLayout)?.title = " "
+                }
+            })
         }
     }
 }
