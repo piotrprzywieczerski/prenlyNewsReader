@@ -3,7 +3,7 @@
     package="com.prenly.newsreader">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:name=".NewsReaderApp"
@@ -24,8 +24,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ItemDetailActivity"
-            android:label="@string/title_item_detail"
+            android:name=".ArticleDetailActivity"
             android:parentActivityName=".ArticleListActivity"
             android:theme="@style/Theme.NewsReader.NoActionBar">
             <meta-data

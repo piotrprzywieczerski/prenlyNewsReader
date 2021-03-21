@@ -29,7 +29,17 @@ object ArticleListBindings {
         imageUrl?.let {
             GlideApp.with(imageView.context)
                 .load(imageUrl)
-                .fitCenter()
+                .centerCrop()
+                .into(imageView)
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("imageUrl2")
+    fun bindArticles2(imageView: ImageView, imageUrl: String?) {
+        imageUrl?.let {
+            GlideApp.with(imageView.context)
+                .load(imageUrl)
                 .into(imageView)
         }
     }
