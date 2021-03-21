@@ -9,8 +9,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.prenly.newsreader.articlelist.ArticleListViewModel
 import com.prenly.newsreader.databinding.ActivityArticleDetailBinding
-import com.prenly.newsreader.domain.model.Article
-import timber.log.Timber
 
 class ArticleDetailActivity : AppCompatActivity() {
 
@@ -34,9 +32,11 @@ class ArticleDetailActivity : AppCompatActivity() {
 
         val articleId = intent.getStringExtra(ArticleDetailFragment.ARG_ITEM_ID)
         articleListViewModel.article(articleId!!).observe(this,
-            Observer<Article> { article ->
-                Timber.d("Piotr setting article with title: ${article.title}")
-                binding.article = article
+            Observer<ArticleViewModelEvent> { articleEvent ->
+                binding.article = articleEvent
+                if (articleEvent.article != null) {
+                    binding.loading = false
+                } else binding.loading = articleEvent.loading
             }
         )
         // savedInstanceState is non-null when there is fragment state
@@ -53,7 +53,6 @@ class ArticleDetailActivity : AppCompatActivity() {
             // using a fragment transaction.
             val fragment = ArticleDetailFragment().apply {
                 arguments = Bundle().apply {
-                    Timber.d("Piotr putting id: $articleId in the bundle")
                     putString(
                         ArticleDetailFragment.ARG_ITEM_ID,
                         articleId

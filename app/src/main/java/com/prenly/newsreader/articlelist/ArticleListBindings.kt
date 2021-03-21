@@ -6,6 +6,7 @@ import android.widget.ProgressBar
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.prenly.newsreader.ArticleListViewModelEvent
+import com.prenly.newsreader.ArticleViewModelEvent
 import com.prenly.newsreader.GlideApp
 
 /**
@@ -39,6 +40,16 @@ object ArticleListBindings {
     }
 
     @JvmStatic
+    @BindingAdapter("loading")
+    fun loading(progressBar: ProgressBar, isLoading: Boolean?) {
+        if (isLoading == true) {
+            progressBar.visibility = View.VISIBLE
+        } else {
+            progressBar.visibility = View.GONE
+        }
+    }
+
+    @JvmStatic
     @BindingAdapter("imageUrl")
     fun bindArticles(imageView: ImageView, imageUrl: String?) {
         imageUrl?.let {
@@ -50,12 +61,25 @@ object ArticleListBindings {
     }
 
     @JvmStatic
-    @BindingAdapter("imageUrl2")
-    fun bindArticles2(imageView: ImageView, imageUrl: String?) {
-        imageUrl?.let {
+    @BindingAdapter("imageUrl")
+    fun bindArticles2(imageView: ImageView, articleEvent: ArticleViewModelEvent?) {
+        articleEvent?.article?.let {
+            imageView.visibility = View.VISIBLE
             GlideApp.with(imageView.context)
-                .load(imageUrl)
+                .load(it.imageUrl)
                 .into(imageView)
+        } ?: run {
+            imageView.visibility = View.GONE
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("goneWhenTrue")
+    fun goneWhenTrue(view: View, isGone: Boolean?) {
+        if (isGone == true) {
+            view.visibility = View.GONE
+        } else {
+            view.visibility = View.VISIBLE
         }
     }
 }

@@ -46,8 +46,10 @@ class ArticleDetailFragment : Fragment() {
                 )
             }
             articleListViewModel.article(it).observe(this as LifecycleOwner,
-                Observer<Article> { article ->
-                    binding.article = article
+                Observer<ArticleViewModelEvent> { articleEvent ->
+                    if (articleEvent.article != null) {
+                        binding.article = articleEvent.article
+                    }
                 }
             )
         }

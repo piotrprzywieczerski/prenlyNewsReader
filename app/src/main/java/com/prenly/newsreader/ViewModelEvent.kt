@@ -8,3 +8,9 @@ data class ArticleListViewModelEvent(
   val error: Throwable? = null,
   val loading: Boolean = false
 )
+
+data class ArticleViewModelEvent(
+  val article: Article? = null,
+  val error: Throwable? = null,
+  val loading: Boolean = false
+)
