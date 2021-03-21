@@ -25,7 +25,6 @@
         </activity>
         <activity
             android:name=".ArticleDetailActivity"
-            android:label="@string/title_item_detail"
             android:parentActivityName=".ArticleListActivity"
             android:theme="@style/Theme.NewsReader.NoActionBar">
             <meta-data
