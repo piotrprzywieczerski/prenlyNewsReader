@@ -30,6 +30,7 @@ class NewsApiRepository : NewsRepository {
             }
             .toObservable()
             .startWith(RemoteResource.Loading)
+            .onErrorReturn { RemoteResource.Error(it) }
             .subscribeOn(Schedulers.computation())
             .observeOn(AndroidSchedulers.mainThread())
     }

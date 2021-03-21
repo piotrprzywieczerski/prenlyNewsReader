@@ -28,6 +28,8 @@
             android:layout_height="wrap_content"
             android:fitsSystemWindows="true"
             android:minHeight="@dimen/app_bar_height"
+            app:title="@{article}"
+            app:goneWhenTrue="@{loading}"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
